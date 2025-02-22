@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <!-- Action Window -->
+        <record model="ir.actions.act_window" id="registration_action_window">
+            <field name="name">Registration View</field>
+            <field name="res_model">registration.form</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Form View for Customers -->
+        <record model="ir.ui.view" id="registration_form_view">
+            <field name="name">registration form</field>
+            <field name="model">registration.form</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+<!--                            <field name="partner_id"/>-->
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="product"/>
+                            <field name="product_details"/>
+                            <field name="date"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Menu Root -->
+        <menuitem name="Registration" id="menu_root"/>
+
+        <!-- Submenu -->
+        <menuitem name="Registration Form" id="customer_menu" parent="menu_root" action="registration_action_window"/>
+    </data>
+</odoo>

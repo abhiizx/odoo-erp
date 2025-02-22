@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <!-- Action Window -->
+        <record model="ir.actions.act_window" id="complaint_action_window">
+            <field name="name">Complaint View</field>
+            <field name="res_model">complaint.form</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <!-- Form View for Customers -->
+        <record model="ir.ui.view" id="complaint_form_view">
+            <field name="name">Complaint form</field>
+            <field name="model">complaint.form</field>
+            <field name="arch" type="xml">
+                <form string="Complaint Form">
+
+                    <!--Open/close button-->
+                    <sheet>
+                        <group>
+                            <!--<field name="complaint_id" readonly="1"/>-->
+                            <field name="status" widget="statusbar"/>
+                        </group>
+                        <group>
+                            <button name="action_open" type="object" string="Open" class="oe_highlight"
+                                    attrs="{'invisible': [('status', '!=', 'new')]}"/>
+                            <button name="action_close" type="object" string="Close" class="oe_highlight"
+                                    attrs="{'invisible': [('status', '=', 'closed')]}"/>
+                        </group>
+                    </sheet>
+
+                    <!--Complaint view-->
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="complaint_id" readonly="1"/>
+                                <field name="customer_id" required="1"/>
+                                <field name="product" readonly="1"/>
+                                <field name="product_details" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="complaint_details"/>
+                                <field name="complaint_date"/>
+                                <field name="status"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Menu Root -->
+        <menuitem name="Registration" id="menu_root"/>
+
+        <!-- Submenu -->
+        <menuitem name="Complaint Form" id="complaint_menu" parent="menu_root" action="complaint_action_window"/>
+    </data>
+</odoo>
